@@ -18,12 +18,12 @@ Refer to chromium instructions for each platform for other prerequesites:<br>
 Create a working directory, enter it, and run:
 
 <b>
-<pre>
-gclient config https://chromium.googlesource.com/libyuv/libyuv
-gclient sync
-</pre>
+<pre>gclient config https://chromium.googlesource.com/libyuv/libyuv
+
+gclient sync</pre>
 </b>
 
+Then you'll get a .gclient file like:
 <pre>
 solutions = [
   { "name"        : "libyuv",
@@ -44,8 +44,7 @@ For Windows the gclient sync must be done from an Administrator command prompt.<
 The sync will generate native build files for your environment using gyp (Windows: Visual Studio, OSX: XCode, Linux: make). This generation can also be forced manually: gclient runhooks
 
 To get just the source (not buildable):
-<pre>
-git clone https://chromium.googlesource.com/libyuv/libyuv
+<pre>git clone https://chromium.googlesource.com/libyuv/libyuv
 </pre>
 
 == Building the Library and Unittests = 
@@ -54,8 +53,7 @@ Note: To build just the library and not the tests, change libyuv_test.gyp to lib
 
 === Windows =
 
-<pre>
-set GYP_DEFINES=target_arch=ia32 
+<pre>set GYP_DEFINES=target_arch=ia32 
 call python gyp_libyuv -fninja -G msvs_version=2013 --depth=. libyuv_test.gyp 
 ninja -j7 -C out\Release 
 ninja -j7 -C out\Debug 

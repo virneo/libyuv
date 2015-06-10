@@ -19,15 +19,15 @@ Create a working directory, enter it, and run:
 
 <b>
 <pre>
-gclient config http://libyuv.googlecode.com/svn/trunk 
+gclient config https://chromium.googlesource.com/libyuv/libyuv
 gclient sync
 </pre>
 </b>
 
 <pre>
 solutions = [
-  { "name"        : "trunk",
-    "url"         : "https://libyuv.googlecode.com/svn/trunk",
+  { "name"        : "libyuv",
+    "url"         : "https://chromium.googlesource.com/libyuv/libyuv",
     "deps_file"   : "DEPS",
     "managed"     : True,
     "custom_deps" : {
@@ -45,12 +45,8 @@ The sync will generate native build files for your environment using gyp (Window
 
 To get just the source (not buildable):
 <pre>
-svn checkout https://libyuv.googlecode.com/svn/trunk/ libyuv
+git clone https://chromium.googlesource.com/libyuv/libyuv
 </pre>
-
-=== Git =
-A git mirror is available here
-http://git.chromium.org/gitweb/?p=external/libyuv.git;a=summary
 
 == Building the Library and Unittests = 
 
@@ -369,12 +365,12 @@ Memory errors and race conditions can be found by running tests under special me
 
 <pre>
 solutions = [
-  { "name"        : "trunk",
-    "url"         : "http://libyuv.googlecode.com/svn/trunk",
+  { "name"        : "libyuv",
+    "url"         : "https://chromium.googlesource.com/libyuv/libyuv",
     "deps_file"   : "DEPS",
     "managed"     : True,
     "custom_deps" : {
-       "third_party/valgrind": "http://src.chromium.org/svn/trunk/deps/third_party/valgrind/binaries",
+       "libyuv/chromium/src/third_party/valgrind": "https://chromium.googlesource.com/chromium/deps/valgrind/binaries",
     },
     "safesync_url": "",
   },

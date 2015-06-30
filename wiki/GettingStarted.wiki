@@ -72,16 +72,6 @@ call python gyp_libyuv -fninja libyuv_test.gyp
 ninja -C out\Debug
 ninja -C out\Release
 </pre>
-==== Building with GN = 
-
-<pre>
-call gn gen out/Release "--args=is_debug=false target_cpu=\"x86\""
-call gn gen out/Debug "--args=is_debug=true target_cpu=\"x86\""
-ninja -C out/Release
-ninja -C out/Debug
-
-</pre>
-
 === OSX =
 
 # Clang 64 bit shown.  Remove clang=1 for gcc and change x64 to ia32 for 32 bit <br>
@@ -94,28 +84,6 @@ GYP_DEFINES="clang=1 target_arch=ia32" ./gyp_libyuv -fninja --depth=. libyuv_tes
 ninja -j7 -C out/Debug 
 ninja -j7 -C out/Release 
 </pre>
-
-=== Linux =
-
-<pre>
-tools/clang/scripts/update.sh
-GYP_DEFINES="target_arch=x64" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
-ninja -j7 -C out/Debug 
-ninja -j7 -C out/Release 
-
-GYP_DEFINES="target_arch=ia32" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
-ninja -j7 -C out/Debug 
-ninja -j7 -C out/Release 
-</pre>
-
-==== CentOS =
-
-On CentOS 32 bit the following work around allows a sync:
-<pre>
-export GYP_DEFINES="host_arch=ia32"
-gclient sync
-</pre>
-
 === iOS =
 http://www.chromium.org/developers/how-tos/build-instructions-ios<br>
 Add to .gclient last line: target_os=['ios'];
@@ -134,12 +102,13 @@ ninja -j7 -C out_ios/Debug-iphoneos libyuv_unittest
 ninja -j7 -C out_ios/Release-iphoneos libyuv_unittest
 </pre>
 
-simulator
+simulator (fat)
 <pre>
-GYP_DEFINES="OS=ios target_arch=ia32 target_subarch=64" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_sim" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+GYP_DEFINES="OS=ios target_arch=ia32 target_subarch=32" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_sim" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
 ninja -j7 -C out_sim/Debug-iphonesimulator libyuv_unittest
 ninja -j7 -C out_sim/Release-iphonesimulator libyuv_unittest
 </pre>
+
 === Android =
 https://code.google.com/p/chromium/wiki/AndroidBuildInstructions<br>
 Add to .gclient last line: target_os=['android'];
@@ -183,6 +152,37 @@ source build/android/envsetup.sh
 gclient runhooks
 ninja -j7 -C out/Debug 
 ninja -j7 -C out/Release 
+</pre>
+
+==== Building with GN = 
+
+<pre>
+call gn gen out/Release "--args=is_debug=false target_cpu=\"x86\""
+call gn gen out/Debug "--args=is_debug=true target_cpu=\"x86\""
+ninja -C out/Release
+ninja -C out/Debug
+
+</pre>
+
+=== Linux =
+
+<pre>
+tools/clang/scripts/update.sh
+GYP_DEFINES="target_arch=x64" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+ninja -j7 -C out/Debug 
+ninja -j7 -C out/Release 
+
+GYP_DEFINES="target_arch=ia32" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+ninja -j7 -C out/Debug 
+ninja -j7 -C out/Release 
+</pre>
+
+==== CentOS =
+
+On CentOS 32 bit the following work around allows a sync:
+<pre>
+export GYP_DEFINES="host_arch=ia32"
+gclient sync
 </pre>
 
 === Windows Shared Library =

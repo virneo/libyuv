@@ -37,7 +37,7 @@ solutions = [
 ];
 </pre>
 
-For iOS add ;target_os=['ios']; to your OSX .gclient and run gclient sync --nohooks twice.<br>
+For iOS add ;target_os=['ios']; to your OSX .gclient and run GYP_DEFINES="OS=ios" gclient sync.<br>
 For Android add ;target_os=['android']; to your Linux .gclient and run gclient sync --nohooks<br>
 For Windows the gclient sync must be done from an Administrator command prompt.<br>
 
@@ -134,6 +134,12 @@ ninja -j7 -C out_ios/Debug-iphoneos libyuv_unittest
 ninja -j7 -C out_ios/Release-iphoneos libyuv_unittest
 </pre>
 
+simulator
+<pre>
+GYP_DEFINES="OS=ios target_arch=ia32 target_subarch=64" GYP_CROSSCOMPILE=1 GYP_GENERATOR_FLAGS="output_dir=out_sim" ./gyp_libyuv -f ninja --depth=. libyuv_test.gyp 
+ninja -j7 -C out_sim/Debug-iphonesimulator libyuv_unittest
+ninja -j7 -C out_sim/Release-iphonesimulator libyuv_unittest
+</pre>
 === Android =
 https://code.google.com/p/chromium/wiki/AndroidBuildInstructions<br>
 Add to .gclient last line: target_os=['android'];
@@ -351,7 +357,7 @@ http://www.drmemory.org/docs/page_install_windows.html
 
 <pre>
 set GYP_DEFINES=build_for_tool=drmemory target_arch=ia32 
-call python gyp_libyuv -fninja -G msvs_version=2012 --depth=. libyuv_test.gyp 
+call python gyp_libyuv -fninja -G msvs_version=2013 --depth=. libyuv_test.gyp 
 ninja -C out\Debug 
 drmemory out\Debug\libyuv_unittest.exe --gtest_catch_exceptions=0 --gtest_filter=* 
 </pre>

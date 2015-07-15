@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Rotation by multiplies of 90 degrees allows mobile devices to rotate webcams from landscape to portrait.  The higher level functions ConvertToI420 and ConvertToARGB allow rotation of any format.  Optimized functionality is supported for I420, ARGB and NV12/21.  
+Rotation by multiplies of 90 degrees allows mobile devices to rotate webcams from landscape to portrait.  The higher level functions ConvertToI420 and ConvertToARGB allow rotation of any format.  Optimized functionality is supported for I420, ARGB, NV12 and NV21.  
 
 = ConvertToI420 =
 
@@ -105,6 +105,6 @@ Mirror functionality can also be achieved with the I420Scale and ARGBScale funct
 
 = Invert - Vertical Flip =
 
-Inverting can be achieved with almost any libyuv function by passing a negative height.
+Inverting can be achieved with almost any libyuv function by passing a negative source height.
 
 I420Mirror and ARGBMirror can also be used to rotate by 180 degrees by passing a negative height.
